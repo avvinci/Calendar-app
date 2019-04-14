@@ -20,33 +20,41 @@ function getDaysInMonth(month, year) {
 }
 
 let id = 0 ;
-function DayClicked(e){  
-    console.log(e) ; 
+function DayClicked(e, p = -1 ){  
+    console.log(e ,id ) ; 
+    // if(p == -1)
     id++ ; 
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
     var newelem = document.createElement("div");
     newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
     elem.insertAdjacentElement('afterend',newelem); 
-    window.localStorage.setItem("day "+ e + " " + id , JSON.stringify(newelem)); 
+    window.localStorage.setItem("day "+ e + " id " + id +"." , JSON.stringify(newelem.innerHTML)); 
+    // let item = JSON.parse( window.localStorage.getItem("day " + e + " id " + id + ".")) ; 
+    // console.log(item);
 }
 
 
 function getLocalStorage(){
-    
     for(i = 0; i <= 31 ;i++){
-        for(j = 0 ; j<= id ;j++){
-            let item = JSON.parse( window.localStorage.getItem("day " + i + " " + j)) ; 
+        for(j = 0 ; j<= 20 ;j++){
+            let itemId = "day " + i + " id " + j + "." ; 
+            let item = ( window.localStorage.getItem(itemId)) ;             
             if(item ===  null){
                 continue; 
             }
-            console.log(item) ; 
+            // localStorage.removeItem(itemId) ; 
+            id++ ; 
+            var elem = document.getElementById("day" + i ); 
+            elem.classList.add('selected') ; 
+            var newelem = document.createElement("div");
+            newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
+            elem.insertAdjacentElement('afterend',newelem); 
         }
     }
-    localStorage.clear() ; 
 }
 window.onload = function(){    
-    getLocalStorage() ; 
+    // id = 0 ;
     let days = getDaysInMonth(3, 2019) ; 
     let content = document.createElement('div');
     content.innerHTML = `<label id  = "month"> Month: April</label>`;
@@ -59,5 +67,7 @@ window.onload = function(){
         par.appendChild(dayContent) ;  
         // console.log(days[i].getDate()); 
     } 
+    getLocalStorage() ; 
+
 }
    
