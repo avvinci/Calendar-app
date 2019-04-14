@@ -25,3 +25,24 @@ textarea{
 	padding-top:14px;
 	padding-bottom:13px;
 }
+
+
+#button {
+	margin-top:8px;
+	height:15px;
+	padding-left:8px;
+	padding-right:8px;
+	font-size:12px;
+	color:#FFF;
+	box-shadow: 0px 2px 5px #000;
+	background-color: #62add6;
+	background-image:url(https://static.tumblr.com/maopbtg/ZHLmgtok7/button.png);
+}
+#button:active {
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+#button:focus {
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}

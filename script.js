@@ -24,7 +24,7 @@ function DayClicked(e){
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
     var newelem = document.createElement("div");
-    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea>`; 
+    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
     elem.insertAdjacentElement('afterend',newelem); 
 }
 
