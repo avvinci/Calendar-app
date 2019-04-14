@@ -19,16 +19,34 @@ function getDaysInMonth(month, year) {
     return days;
 }
 
+let id = 0 ;
 function DayClicked(e){  
     console.log(e) ; 
+    id++ ; 
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
     var newelem = document.createElement("div");
     newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
     elem.insertAdjacentElement('afterend',newelem); 
+    window.localStorage.setItem("day "+ e + " " + id , JSON.stringify(newelem)); 
 }
 
+
+function getLocalStorage(){
+    
+    for(i = 0; i <= 31 ;i++){
+        for(j = 0 ; j<= id ;j++){
+            let item = JSON.parse( window.localStorage.getItem("day " + i + " " + j)) ; 
+            if(item ===  null){
+                continue; 
+            }
+            console.log(item) ; 
+        }
+    }
+    localStorage.clear() ; 
+}
 window.onload = function(){    
+    getLocalStorage() ; 
     let days = getDaysInMonth(3, 2019) ; 
     let content = document.createElement('div');
     content.innerHTML = `<label id  = "month"> Month: April</label>`;
