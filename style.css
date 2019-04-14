@@ -1,5 +1,15 @@
 .days{
-    display: ;
-    padding: 35px 40 px; 
-    color: rebeccapurple;
+    display: inline;
+    font-size: 20px;
+    padding: 55px 50 px; 
+    color: orange;
+}
+
+.days:hover{
+    background: blue;
+}
+
+.selected{
+    font-size: 21px;
+    color: red;
 }

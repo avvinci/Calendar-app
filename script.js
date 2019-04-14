@@ -21,6 +21,11 @@ function getDaysInMonth(month, year) {
 
 function DayClicked(e){  
     console.log(e) ; 
+    var elem = document.getElementById("day" + e ); 
+    elem.classList.add('selected') ; 
+    var newelem = document.createElement("div");
+    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea>`; 
+    elem.insertAdjacentElement('afterend',newelem); 
 }
 
 window.onload = function(){    
@@ -31,7 +36,8 @@ window.onload = function(){
     for(i = 0; i < days.length;i++){
         let dayContent = document.createElement('div') ; 
         let par = document.querySelector('#month'); 
-        dayContent.innerHTML = `<label class = "days" onclick = "DayClicked(` + days[i].getDate() + `)">` + days[i].getDate()  + '</label>' ; 
+        let myday = days[i].getDate() ; 
+        dayContent.innerHTML = `<label class = "days" id = "day` + myday + `" onclick = "DayClicked(` + myday + `)">` + myday  + '</label>' ; 
         par.appendChild(dayContent) ;  
         // console.log(days[i].getDate()); 
     } 
