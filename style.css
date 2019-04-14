@@ -1,15 +1,27 @@
 .days{
-    display: inline;
-    font-size: 20px;
-    padding: 55px 50 px; 
-    color: orange;
+    /* display: inline; */
+	color:#222;
+	font-family:Courier, monospace;
+	font-weight:normal;
+	font-size:23px;
+	line-height:40px;
+    padding-left:60px;
+	padding-right:60px;
+	padding-top:5px;
+	padding-bottom:5px;
 }
 
 .days:hover{
-    background: blue;
+    font-weight:bold;
 }
 
 .selected{
-    font-size: 21px;
     color: red;
+}
+
+textarea{
+    line-height:5px;
+	padding-left:60px;
+	padding-top:14px;
+	padding-bottom:13px;
 }
