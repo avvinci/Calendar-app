@@ -1,12 +1,33 @@
+.title{
+	/* display: block; */
+	color:#222;
+	font-family:Courier, monospace;
+	font-weight:normal;
+	text-align: left;
+	font-size:32px;
+	line-height:60px;
+    padding-left:20px;
+	padding-right:150px;
+	padding-top:20px;
+	padding-bottom:100px;
+}
+.monthLabel{
+	/* display: block; */
+	text-align: center;
+	font-size:25px;
+
+
+}
 .days{
-    /* display: inline; */
+	display: block;
+	text-align: left;
 	color:#222;
 	font-family:Courier, monospace;
 	font-weight:normal;
 	font-size:23px;
 	line-height:40px;
     padding-left:60px;
-	padding-right:150px;
+	padding-right:100px;
 	padding-top:7px;
 	padding-bottom:7px;
 }
@@ -29,7 +50,9 @@ textarea{
 	padding-top:14px;
 	padding-bottom:13px;
 }
-
+.ta{
+	text-align: left;
+}
 
 #button {
 	margin-top:8px;

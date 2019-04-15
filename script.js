@@ -27,7 +27,7 @@ function DayClicked(e, p = -1 ){
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
     var newelem = document.createElement("div");
-    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
+    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button"> Add Note</button>`; 
     elem.insertAdjacentElement('afterend',newelem); 
     window.localStorage.setItem("day "+ e + " id " + id +"." , JSON.stringify(newelem.innerHTML)); 
     // let item = JSON.parse( window.localStorage.getItem("day " + e + " id " + id + ".")) ; 
@@ -48,7 +48,7 @@ function getLocalStorage(){
             var elem = document.getElementById("day" + i ); 
             elem.classList.add('selected') ; 
             var newelem = document.createElement("div");
-            newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button">X</button>`; 
+            newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note">  </textarea> <button id = "button"> Add Note </button>`; 
             elem.insertAdjacentElement('afterend',newelem); 
         }
     }
@@ -57,13 +57,16 @@ window.onload = function(){
     // id = 0 ;
     let days = getDaysInMonth(3, 2019) ; 
     let content = document.createElement('div');
-    content.innerHTML = `<label id  = "month"> Month: April</label>`;
+    content.className = "monthLabel" ; 
+    content.innerHTML = `<label class = "month" id = "month" >April 2019</label>`;
     head.appendChild(content) ;  
     for(i = 0; i < days.length;i++){
         let dayContent = document.createElement('div') ; 
+        dayContent.className = "dayLabel" ; 
+
         let par = document.querySelector('#month'); 
         let myday = days[i].getDate() ; 
-        dayContent.innerHTML = `<label class = "days" id = "day` + myday + `" onclick = "DayClicked(` + myday + `)">` + myday  + '</label>' ; 
+        dayContent.innerHTML = `<label class = "days" id = "day` + myday + `" onclick = "DayClicked(` + myday + `)">` + myday  + '</label> ' ; 
         par.appendChild(dayContent) ;  
         // console.log(days[i].getDate()); 
     } 
