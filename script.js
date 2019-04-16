@@ -4,6 +4,7 @@
  * @return {Date[]} List with date objects for each day of the month
  */
 
+let allTa = document.querySelectorAll(".ta") ; 
 
 let head = document.querySelector('#title'); 
 console.log(head) ; 
@@ -19,6 +20,10 @@ function getDaysInMonth(month, year) {
     return days;
 }
 
+function saveText(e,id){
+    console.log('saving'); 
+    // console.log("saving ", e , id);
+}
 let id = 0 ;
 function DayClicked(e, p = -1 ){  
     console.log(e ,id ) ; 
@@ -27,7 +32,7 @@ function DayClicked(e, p = -1 ){
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
     var newelem = document.createElement("div");
-    newelem.innerHTML = `<textarea placeholder="Enter note">  </textarea> <button id = "button"> Add Note</button>`; 
+    newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note" onChange = "saveText()">  </textarea>  <button id = "button"> Add Note</button>`; 
     elem.insertAdjacentElement('afterend',newelem); 
     window.localStorage.setItem("day "+ e + " id " + id +"." , JSON.stringify(newelem.innerHTML)); 
     // let item = JSON.parse( window.localStorage.getItem("day " + e + " id " + id + ".")) ; 
@@ -74,3 +79,6 @@ window.onload = function(){
 
 }
    
+
+console.log(allTa); 
+// allTa.forEach(ta => ta.addEventListener('change' ,saveText()));
