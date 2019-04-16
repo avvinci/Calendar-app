@@ -4,12 +4,14 @@
  * @return {Date[]} List with date objects for each day of the month
  */
 
-let allTa = document.querySelectorAll(".ta") ; 
 
+// let allTa = document.querySelectorAll(".ta") ; 
 let head = document.querySelector('#title'); 
-console.log(head) ; 
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
 function getDaysInMonth(month, year) {
-    // Since no month has fewer than 28 days
     let date = new Date(year, month, 1);
     let days = [];
     console.log('month', month, 'date.getMonth()', date.getMonth())
@@ -20,31 +22,38 @@ function getDaysInMonth(month, year) {
     return days;
 }
 
-function saveText(e,id){
-    console.log('saving'); 
+function saveText(e){
+    console.log('saving');
+    console.log(e.value) ; 
+
     // console.log("saving ", e , id);
 }
+
+
 let id = 0 ;
-function DayClicked(e, p = -1 ){  
-    console.log(e ,id ) ; 
-    // if(p == -1)
+function DayClicked(e){  
+    console.log(e ,id ); 
     id++ ; 
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
-    var newelem = document.createElement("div");
-    newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note" onChange = "saveText()">  </textarea>  <button id = "button"> Add Note</button>`; 
-    elem.insertAdjacentElement('afterend',newelem); 
-    window.localStorage.setItem("day "+ e + " id " + id +"." , JSON.stringify(newelem.innerHTML)); 
-    // let item = JSON.parse( window.localStorage.getItem("day " + e + " id " + id + ".")) ; 
+    var newelem = createTextArea() ; 
+    elem.insertAdjacentElement('afterend',newelem);
+    let itemId = "day " + e + " id " + id + "." ;  
+    window.localStorage.setItem(itemId, JSON.stringify(newelem.innerHTML)); 
     // console.log(item);
 }
 
+function createTextArea(){
+    var newelem = document.createElement("div");
+    newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note" onchange = "saveText(this)">  </textarea> <button id = "button"> Add Note </button>`; 
+    return newelem ;      
+}
 
 function getLocalStorage(){
     for(i = 0; i <= 31 ;i++){
         for(j = 0 ; j<= 20 ;j++){
             let itemId = "day " + i + " id " + j + "." ; 
-            let item = ( window.localStorage.getItem(itemId)) ;             
+            let item = window.localStorage.getItem(itemId);             
             if(item ===  null){
                 continue; 
             }
@@ -52,33 +61,40 @@ function getLocalStorage(){
             id++ ; 
             var elem = document.getElementById("day" + i ); 
             elem.classList.add('selected') ; 
-            var newelem = document.createElement("div");
-            newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note">  </textarea> <button id = "button"> Add Note </button>`; 
+            var newelem = createTextArea() ; 
             elem.insertAdjacentElement('afterend',newelem); 
         }
     }
+
 }
+
 window.onload = function(){    
-    // id = 0 ;
     let days = getDaysInMonth(3, 2019) ; 
     let content = document.createElement('div');
     content.className = "monthLabel" ; 
     content.innerHTML = `<label class = "month" id = "month" >April 2019</label>`;
-    head.appendChild(content) ;  
+    head.appendChild(content) ;
+
     for(i = 0; i < days.length;i++){
         let dayContent = document.createElement('div') ; 
         dayContent.className = "dayLabel" ; 
-
         let par = document.querySelector('#month'); 
         let myday = days[i].getDate() ; 
-        dayContent.innerHTML = `<label class = "days" id = "day` + myday + `" onclick = "DayClicked(` + myday + `)">` + myday  + '</label> ' ; 
+        dayContent.innerHTML = 
+        `<label class = "days" id = "day` + myday + `" onclick = "DayClicked(` + myday + `)">` + myday  + '</label> ' ; 
         par.appendChild(dayContent) ;  
         // console.log(days[i].getDate()); 
     } 
+
     getLocalStorage() ; 
 
 }
-   
 
-console.log(allTa); 
+///////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+// console.log(allTa); 
 // allTa.forEach(ta => ta.addEventListener('change' ,saveText()));
