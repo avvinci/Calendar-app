@@ -14,7 +14,7 @@ let head = document.querySelector('#title');
 function getDaysInMonth(month, year) {
     let date = new Date(year, month, 1);
     let days = [];
-    console.log('month', month, 'date.getMonth()', date.getMonth())
+    // console.log('month', month, 'date.getMonth()', date.getMonth())
     while (date.getMonth() === month) {
         days.push(new Date(date));
         date.setDate(date.getDate() + 1);
@@ -22,30 +22,35 @@ function getDaysInMonth(month, year) {
     return days;
 }
 
-function saveText(e){
-    console.log('saving');
-    console.log(e.value) ; 
-
-    // console.log("saving ", e , id);
+function saveText(elem , e , id){
+    // console.log('saving');
+    // console.log(elem) ; 
+    // console.log(e.id);
+    let textId = "dayText " + e + " id " + id+  "." ; 
+    let text = window.localStorage.getItem(textId); 
+    if(text !== null ){
+        window.localStorage.removeItem(textId) ; 
+    }
+        window.localStorage.setItem(textId,elem.value);  
 }
 
 
 let id = 0 ;
 function DayClicked(e){  
-    console.log(e ,id ); 
+    // console.log(e ,id ); 
     id++ ; 
     var elem = document.getElementById("day" + e ); 
     elem.classList.add('selected') ; 
-    var newelem = createTextArea() ; 
+    var newelem = createTextArea(e,id) ; 
     elem.insertAdjacentElement('afterend',newelem);
     let itemId = "day " + e + " id " + id + "." ;  
     window.localStorage.setItem(itemId, JSON.stringify(newelem.innerHTML)); 
     // console.log(item);
 }
 
-function createTextArea(){
+function createTextArea(e,id){
     var newelem = document.createElement("div");
-    newelem.innerHTML = `<textarea class ="ta" placeholder="Enter note" onchange = "saveText(this)">  </textarea> <button id = "button"> Add Note </button>`; 
+    newelem.innerHTML = `<textarea class ="ta" id = "TA ` + e + `" "` + id + `" placeholder="Enter note" onchange = "saveText(this ,` + e + `,` + id + `)">  </textarea> <button id = "button"> Add Note </button>`; 
     return newelem ;      
 }
 
@@ -57,12 +62,22 @@ function getLocalStorage(){
             if(item ===  null){
                 continue; 
             }
-            // localStorage.removeItem(itemId) ; 
+            // increase id -> since all starting id's will be taken by local storage. 
             id++ ; 
             var elem = document.getElementById("day" + i ); 
             elem.classList.add('selected') ; 
-            var newelem = createTextArea() ; 
+
+            let textId = "dayText " + i + " id " + j + "." ; 
+            let text = window.localStorage.getItem(textId);    
+            console.log(text) ;  
+
+            var newelem = createTextArea(i,j) ; 
+            let taId = "TA " + i + " " + j  ; 
+            // document.getElementById(taId).value = text;  
+            // newelem.value = text; 
             elem.insertAdjacentElement('afterend',newelem); 
+ 
+
         }
     }
 
@@ -91,8 +106,6 @@ window.onload = function(){
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 
