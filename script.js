@@ -69,12 +69,10 @@ function getLocalStorage(){
 
             let textId = "dayText " + i + " id " + j + "." ; 
             let text = window.localStorage.getItem(textId);    
-            console.log(text) ;  
 
             var newelem = createTextArea(i,j) ; 
-            let taId = "TA " + i + " " + j  ; 
-            // document.getElementById(taId).value = text;  
-            // newelem.value = text; 
+            newelem.firstChild.value = text; 
+            // console.log(newelem.firstChild.value) ;
             elem.insertAdjacentElement('afterend',newelem); 
  
 
